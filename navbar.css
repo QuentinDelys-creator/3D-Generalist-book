@@ -123,6 +123,6 @@ section, .grid, .project-gallery {
 
   /* Décaler le reste du contenu pour ne pas cacher derrière la navbar */
   body {
-    padding-top: 60px; /* ajuster selon hauteur réelle navbar */
+    padding-top: 120px; /* ajuster selon hauteur réelle navbar */
   }
 }
