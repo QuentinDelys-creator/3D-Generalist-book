@@ -741,10 +741,10 @@ li::after {
 }
 
 /* ============================
-   ABOUT & SOFTWARES - FIX MOBILE OVERFLOW
+   ABOUT & SOFTWARES - CLEAN + MOBILE FIX
 ============================ */
 
-/* sécurité globale (déjà présent, redéfini si nécessaire) */
+/* sécurité globale */
 html, body {
   box-sizing: border-box;
   width: 100%;
@@ -753,7 +753,9 @@ html, body {
 }
 *, *::before, *::after { box-sizing: inherit; }
 
-/* SECTION ABOUT */
+/* =========================
+   SECTION ABOUT
+========================= */
 #about {
   width: 100%;
   background: linear-gradient(135deg, #f0f0f0 0%, #dcdcdc 100%);
@@ -761,24 +763,32 @@ html, body {
   padding: 80px 16px;
   box-sizing: border-box;
   text-align: center;
-  overflow: hidden;
+  overflow: hidden; /* empêche débordement horizontal */
 }
 
-/* wrapper centré et contraint */
 #about .about-wrapper,
 #about .about-container {
   max-width: 1100px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 12px; /* réduit padding horizontal pour mobile */
+  padding: 0 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 28px;
-  overflow: hidden; /* empêche le débordement horizontal */
+  overflow: hidden; /* empêche débordement horizontal */
 }
 
-/* photo : taille fixe selon breakpoint */
+/* titre */
+#about h2 {
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  margin: 0 0 8px 0;
+  color: #111;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* photo */
 #about .about-wrapper > img,
 #about .about-container img {
   width: 180px;
@@ -795,14 +805,16 @@ html, body {
   color: #222;
   font-size: clamp(0.95rem, 1.8vw, 1.05rem);
   line-height: 1.6;
-  max-width: 100%; /* ne pas dépasser le wrapper */
+  max-width: 100%; /* mobile safe */
   margin: 0 auto;
   padding: 0 10px;
   word-break: break-word;
   overflow-wrap: break-word;
 }
 
-/* SOFTS SECTION */
+/* =========================
+   SECTION SOFTWARES
+========================= */
 #softwares {
   width: 100%;
   background: linear-gradient(135deg, #ededed 0%, #d9d9d9 100%);
@@ -820,16 +832,16 @@ html, body {
   margin-bottom: 20px;
 }
 
-/* grille des logos — centrée et responsive */
+/* grille des logiciels */
 #softwares .software-grid,
 #about .software-grid {
-  max-width: 100%; /* full width pour mobile */
+  max-width: 900px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 6px; /* padding réduit pour mobile */
+  padding: 0 10px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
-  gap: clamp(12px, 3vw, 20px);
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: clamp(12px, 3vw, 30px);
   justify-items: center;
   align-items: center;
   box-sizing: border-box;
@@ -838,7 +850,7 @@ html, body {
 /* icônes */
 #softwares .software-grid img,
 #about .software-grid img {
-  width: clamp(36px, 12vw, 70px);
+  width: clamp(40px, 8vw, 70px);
   height: auto;
   object-fit: contain;
   display: inline-block;
@@ -855,17 +867,28 @@ html, body {
 #softwares .software-grid p {
   margin-top: 6px;
   color: #222;
-  font-size: clamp(0.75rem, 1.6vw, 0.95rem);
+  font-size: clamp(0.75rem, 1.8vw, 0.95rem);
 }
 
-/* ===== responsive ===== */
+/* =========================
+   RESPONSIVE
+========================= */
+
+/* tablette / petit PC */
 @media (max-width: 1024px) {
   #about { padding: 60px 12px; }
   #about .about-wrapper > img { width: 160px; height: 160px; }
   #about .about-text { max-width: 100%; }
   #softwares { padding: 50px 12px; }
+  #softwares .software-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    padding: 0 6px;
+  }
+  #softwares .software-grid img { width: clamp(36px, 10vw, 60px); }
 }
 
+/* mobile */
 @media (max-width: 768px) {
   #about { padding: 48px 10px; }
   #about .about-wrapper > img { width: 120px; height: 120px; }
@@ -878,3 +901,10 @@ html, body {
   }
   #softwares .software-grid img { width: clamp(36px, 12vw, 56px); }
 }
+
+/* petite sécurité : éviter que les éléments absolus hors sections étendent le layout */
+section *[style*="position: absolute"] {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
