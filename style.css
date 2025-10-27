@@ -741,7 +741,7 @@ li::after {
 }
 
 /* ============================
-   ABOUT & SOFTWARES - CLEAN + MOBILE FIX
+   ABOUT & SOFTWARES - MOBILE SAFE
 ============================ */
 
 /* sécurité globale */
@@ -749,7 +749,7 @@ html, body {
   box-sizing: border-box;
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden; /* empêche le débordement horizontal */
+  overflow-x: hidden; /* empêche débordement horizontal */
 }
 *, *::before, *::after { box-sizing: inherit; }
 
@@ -758,58 +758,19 @@ html, body {
 ========================= */
 #about {
   width: 100%;
-  background: linear-gradient(135deg, #f0f0f0 0%, #dcdcdc 100%);
-  color: #111;
-  padding: 80px 16px;
-  box-sizing: border-box;
-  text-align: center;
-  overflow: hidden; /* empêche débordement horizontal */
+  overflow: hidden; /* empêche débordement */
 }
 
 #about .about-wrapper,
 #about .about-container {
-  max-width: 1100px;
+  max-width: 1100px; /* PC reste inchangé */
   width: 100%;
   margin: 0 auto;
-  padding: 0 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 28px;
-  overflow: hidden; /* empêche débordement horizontal */
-}
-
-/* titre */
-#about h2 {
-  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
-  margin: 0 0 8px 0;
-  color: #111;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-/* photo */
-#about .about-wrapper > img,
-#about .about-container img {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  object-fit: cover;
-  display: block;
-  margin: 0 auto;
-}
-
-/* texte */
-#about .about-text,
-#about .about-wrapper p {
-  color: #222;
-  font-size: clamp(0.95rem, 1.8vw, 1.05rem);
-  line-height: 1.6;
-  max-width: 100%; /* mobile safe */
-  margin: 0 auto;
-  padding: 0 10px;
-  word-break: break-word;
-  overflow-wrap: break-word;
+  overflow: hidden;
 }
 
 /* =========================
@@ -817,94 +778,47 @@ html, body {
 ========================= */
 #softwares {
   width: 100%;
-  background: linear-gradient(135deg, #ededed 0%, #d9d9d9 100%);
-  padding: 60px 16px;
-  box-sizing: border-box;
-  text-align: center;
-  color: #111;
-  border-top: 2px solid rgba(0,0,0,0.04);
-  border-bottom: 2px solid rgba(0,0,0,0.04);
-  overflow: hidden; /* empêche débordement horizontal */
+  overflow: hidden; /* empêche débordement */
 }
 
-#softwares h2 {
-  font-size: clamp(1.3rem, 2.8vw, 2rem);
-  margin-bottom: 20px;
-}
-
-/* grille des logiciels */
 #softwares .software-grid,
 #about .software-grid {
-  max-width: 900px;
+  max-width: 100%;
   width: 100%;
   margin: 0 auto;
-  padding: 0 10px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  gap: clamp(12px, 3vw, 30px);
   justify-items: center;
   align-items: center;
   box-sizing: border-box;
 }
 
-/* icônes */
-#softwares .software-grid img,
-#about .software-grid img {
-  width: clamp(40px, 8vw, 70px);
-  height: auto;
-  object-fit: contain;
-  display: inline-block;
-  transition: transform 0.25s ease, opacity 0.25s ease;
-}
-
-#softwares .software-grid img:hover,
-#about .software-grid img:hover {
-  transform: scale(1.12);
-  opacity: 1;
-}
-
-/* noms logiciels */
-#softwares .software-grid p {
-  margin-top: 6px;
-  color: #222;
-  font-size: clamp(0.75rem, 1.8vw, 0.95rem);
-}
-
 /* =========================
-   RESPONSIVE
+   MOBILE / TABLETTE
 ========================= */
-
-/* tablette / petit PC */
 @media (max-width: 1024px) {
   #about { padding: 60px 12px; }
   #about .about-wrapper > img { width: 160px; height: 160px; }
-  #about .about-text { max-width: 100%; }
+  #about .about-text { max-width: 100%; padding: 0 10px; }
+
   #softwares { padding: 50px 12px; }
   #softwares .software-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    padding: 0 6px;
+    grid-template-columns: repeat(3, 1fr); /* 3 colonnes maximum sur tablette */
+    gap: 12px;
+    padding: 0 8px; /* réduit pour éviter débordement */
   }
   #softwares .software-grid img { width: clamp(36px, 10vw, 60px); }
 }
 
-/* mobile */
 @media (max-width: 768px) {
   #about { padding: 48px 10px; }
   #about .about-wrapper > img { width: 120px; height: 120px; }
   #about h2 { font-size: 1.6rem; }
+
   #softwares { padding: 40px 10px; }
   #softwares .software-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    padding: 0 4px;
+    grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur mobile */
+    gap: 10px;
+    padding: 0 6px;
   }
   #softwares .software-grid img { width: clamp(36px, 12vw, 56px); }
 }
-
-/* petite sécurité : éviter que les éléments absolus hors sections étendent le layout */
-section *[style*="position: absolute"] {
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
