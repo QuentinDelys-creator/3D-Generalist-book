@@ -740,12 +740,11 @@ li::after {
   content: none !important;
 }
 
-/* ===========================
-   ABOUT & SOFTWARES - CLEAN
-   (Coller à la fin du fichier, unique définition)
-   =========================== */
+/* ============================
+   ABOUT & SOFTWARES - FIX MOBILE OVERFLOW
+============================ */
 
-/* sécurité globale */
+/* sécurité globale (déjà présent, redéfini si nécessaire) */
 html, body {
   box-sizing: border-box;
   width: 100%;
@@ -759,9 +758,8 @@ html, body {
   width: 100%;
   background: linear-gradient(135deg, #f0f0f0 0%, #dcdcdc 100%);
   color: #111;
-  padding: 80px 16px;               /* padding horizontal compact */
+  padding: 80px 16px;
   box-sizing: border-box;
-  display: block;                   /* garde simple, évite flex-row imprévu */
   text-align: center;
   overflow: hidden;
 }
@@ -772,23 +770,15 @@ html, body {
   max-width: 1100px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 12px;
+  padding: 0 12px; /* réduit padding horizontal pour mobile */
   display: flex;
-  flex-direction: column;           /* colonne pour éviter débordement horizontal */
+  flex-direction: column;
   align-items: center;
   gap: 28px;
+  overflow: hidden; /* empêche le débordement horizontal */
 }
 
-/* titre */
-#about h2 {
-  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
-  margin: 0 0 8px 0;
-  color: #111;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-/* photo : taille fixe selon breakpoint, pas d'ovale */
+/* photo : taille fixe selon breakpoint */
 #about .about-wrapper > img,
 #about .about-container img {
   width: 180px;
@@ -805,7 +795,7 @@ html, body {
   color: #222;
   font-size: clamp(0.95rem, 1.8vw, 1.05rem);
   line-height: 1.6;
-  max-width: 820px;
+  max-width: 100%; /* ne pas dépasser le wrapper */
   margin: 0 auto;
   padding: 0 10px;
   word-break: break-word;
@@ -822,6 +812,7 @@ html, body {
   color: #111;
   border-top: 2px solid rgba(0,0,0,0.04);
   border-bottom: 2px solid rgba(0,0,0,0.04);
+  overflow: hidden; /* empêche débordement horizontal */
 }
 
 #softwares h2 {
@@ -832,13 +823,13 @@ html, body {
 /* grille des logos — centrée et responsive */
 #softwares .software-grid,
 #about .software-grid {
-  max-width: 900px;
+  max-width: 100%; /* full width pour mobile */
   width: 100%;
   margin: 0 auto;
-  padding: 0 10px;
+  padding: 0 6px; /* padding réduit pour mobile */
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  gap: clamp(12px, 3vw, 30px);
+  grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+  gap: clamp(12px, 3vw, 20px);
   justify-items: center;
   align-items: center;
   box-sizing: border-box;
@@ -847,7 +838,7 @@ html, body {
 /* icônes */
 #softwares .software-grid img,
 #about .software-grid img {
-  width: clamp(40px, 8vw, 70px);
+  width: clamp(36px, 12vw, 70px);
   height: auto;
   object-fit: contain;
   display: inline-block;
@@ -864,26 +855,26 @@ html, body {
 #softwares .software-grid p {
   margin-top: 6px;
   color: #222;
-  font-size: clamp(0.75rem, 1.8vw, 0.95rem);
+  font-size: clamp(0.75rem, 1.6vw, 0.95rem);
 }
 
-/* ===== responsive specifics ===== */
+/* ===== responsive ===== */
 @media (max-width: 1024px) {
-  #about { padding: 60px 14px; }
+  #about { padding: 60px 12px; }
   #about .about-wrapper > img { width: 160px; height: 160px; }
-  #about .about-text { max-width: 720px; }
-  #softwares { padding: 50px 14px; }
+  #about .about-text { max-width: 100%; }
+  #softwares { padding: 50px 12px; }
 }
 
 @media (max-width: 768px) {
-  #about { padding: 48px 12px; }
+  #about { padding: 48px 10px; }
   #about .about-wrapper > img { width: 120px; height: 120px; }
   #about h2 { font-size: 1.6rem; }
-  #softwares { padding: 40px 12px; }
-  #softwares .software-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  #softwares { padding: 40px 10px; }
+  #softwares .software-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding: 0 4px;
+  }
   #softwares .software-grid img { width: clamp(36px, 12vw, 56px); }
 }
-
-/* petite optimisation : éviter que les éléments absolus hors sections étendent le layout */
-section *[style*="position: absolute"] { max-width: 100%; box-sizing: border-box; }
-
