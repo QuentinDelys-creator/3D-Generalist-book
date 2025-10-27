@@ -85,27 +85,33 @@ section, .grid, .project-gallery {
 
 
 @media (max-width: 768px) {
-  /* Navbar fixée juste sous le language-switcher */
+  /* Le language switcher reste en haut */
+  .language-switcher {
+    position: fixed;
+    top: 0;
+    right: 20px;
+    z-index: 10000;
+  }
+
+  /* Navbar juste en dessous du switcher */
   .navbar {
     position: fixed;
-    top: 45px; /* décale la navbar sous le switcher (ajuste selon sa hauteur) */
+    top: calc( var(--switcher-height, 45px) );
     left: 0;
     width: 100%;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     padding: 8px 20px;
-    z-index: 9998; /* un cran sous le switcher */
-    background: transparent; /* ou ajoute rgba(0,0,0,0.6) si tu veux un fond léger */
+    background: transparent;
+    z-index: 9999;
     pointer-events: auto;
   }
 
-  /* Liste des liens */
+  /* Liste horizontale */
   .navbar ul {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
     gap: 15px;
     margin: 0;
     padding: 0;
@@ -115,7 +121,7 @@ section, .grid, .project-gallery {
     display: none;
   }
 
-  /* Corrige le header pour éviter le centrage vertical */
+  /* Supprimer tout centrage vertical du header */
   header {
     display: block !important;
     justify-content: flex-start !important;
@@ -123,18 +129,10 @@ section, .grid, .project-gallery {
     padding-top: 0 !important;
   }
 
-  /* Décale le contenu sous la navbar */
+  /* Décaler le contenu sous la navbar + switcher */
   body {
-    padding-top: 100px; /* hauteur switcher (~45px) + navbar (~55px) */
-  }
-
-  /* Assure que le language-switcher reste tout en haut */
-  .language-switcher {
-    position: fixed;
-    top: 0;
-    right: 20px;
-    z-index: 9999; /* au-dessus de tout */
+    --switcher-height: 45px; /* si tu veux ajuster, change ici */
+    padding-top: calc(var(--switcher-height) + 55px); /* switcher + navbar */
   }
 }
-
 
