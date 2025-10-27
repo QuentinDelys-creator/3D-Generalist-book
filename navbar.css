@@ -94,7 +94,7 @@ section, .grid, .project-gallery {
     pointer-events: auto;
   }
 
-  /* === NAVBAR - juste sous le switcher === */
+  /* === NAVBAR - juste en dessous du switcher === */
   .navbar {
     position: fixed;
     top: calc(var(--switcher-height, 45px));
@@ -121,13 +121,13 @@ section, .grid, .project-gallery {
     background: none !important;
   }
 
-  /* Désactive le style “scrolled” */
+  /* Désactive version scrolled */
   .navbar.scrolled {
     background: transparent !important;
     backdrop-filter: none !important;
   }
 
-  /* Liste horizontale */
+  /* Liste des liens horizontale */
   .navbar ul {
     display: flex;
     flex-direction: row;
@@ -140,7 +140,7 @@ section, .grid, .project-gallery {
     display: none;
   }
 
-  /* Empêche le header de bloquer les clics */
+  /* === HEADER - empêche overlay mais permet cliquables === */
   header {
     display: block !important;
     justify-content: flex-start !important;
@@ -150,18 +150,26 @@ section, .grid, .project-gallery {
     backdrop-filter: none !important;
     height: auto !important;
     min-height: 0 !important;
-    pointer-events: none !important;
+    pointer-events: none !important; /* bloque le header lui-même */
     z-index: 0 !important;
   }
 
-  /* Décale le contenu sous navbar + switcher */
+  /* Réactive les éléments cliquables dans le header */
+  header .btn,
+  header a,
+  header button {
+    pointer-events: auto !important;
+    z-index: 2 !important; /* au-dessus du header */
+  }
+
+  /* Décale le contenu sous la navbar + switcher */
   body {
     --switcher-height: 45px;
-    padding-top: calc(var(--switcher-height) + 55px);
+    padding-top: calc(var(--switcher-height) + 55px); /* ajuste si nécessaire */
     pointer-events: auto !important;
   }
 
-  /* Tout le contenu devient interactif */
+  /* === Contenu de la page interactif === */
   main,
   section,
   #about,
@@ -172,6 +180,7 @@ section, .grid, .project-gallery {
     background: transparent !important;
   }
 }
+
 
 
 
