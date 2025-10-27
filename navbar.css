@@ -84,29 +84,41 @@ section, .grid, .project-gallery {
 }
 
 
-@media(max-width: 768px){
+@media (max-width: 768px) {
   /* Navbar : horizontale et collée en haut */
   .navbar {
-    flex-direction: row;        /* liens en ligne */
-    justify-content: flex-start; /* alignés à gauche */
-    align-items: center;        /* verticalement centrés dans la navbar */
-    padding: 10px 20px;
-    position: relative;         /* pour que padding fonctionne correctement */
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 5px 20px;      /* réduire padding vertical */
+    position: fixed;         /* fixe en haut */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: transparent; /* pas de fond noir */
+    z-index: 9999;
   }
 
   /* Liste des liens */
   .navbar ul {
-    display: flex;              /* force le flex row */
+    display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     gap: 15px;
-    margin-top: 0;              /* enlever margin qui pousse vers le bas */
+    margin: 0;              /* enlever margin qui pousse */
+    padding: 0;
   }
 
   /* Supprimer séparateurs entre items */
   .navbar ul li + li::before {
     display: none;
   }
+
+  /* Décaler le reste du contenu sous la navbar */
+  body > *:not(.navbar):not(.language-switcher) {
+    margin-top: 50px;       /* ajuster selon hauteur réelle de la navbar */
+  }
 }
+
 
