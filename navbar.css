@@ -85,17 +85,26 @@ section, .grid, .project-gallery {
 
 
 @media(max-width: 768px){
+  /* Navbar : horizontale et collée en haut */
   .navbar {
-    flex-direction: row;
-    justify-content: flex-start;
+    flex-direction: row;        /* liens en ligne */
+    justify-content: flex-start; /* alignés à gauche */
+    align-items: center;        /* verticalement centrés dans la navbar */
     padding: 10px 20px;
+    position: relative;         /* pour que padding fonctionne correctement */
   }
+
+  /* Liste des liens */
   .navbar ul {
+    display: flex;              /* force le flex row */
     flex-direction: row;
     justify-content: flex-start;
+    align-items: center;
     gap: 15px;
-    margin-top: 10px;
+    margin-top: 0;              /* enlever margin qui pousse vers le bas */
   }
+
+  /* Supprimer séparateurs entre items */
   .navbar ul li + li::before {
     display: none;
   }
