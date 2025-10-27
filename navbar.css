@@ -85,7 +85,7 @@ section, .grid, .project-gallery {
 
 
 @media (max-width: 768px) {
-  /* Navbar fixée en haut, horizontale, padding réduit */
+  /* Navbar fixée en haut, horizontale */
   .navbar {
     position: fixed;
     top: 0;
@@ -97,7 +97,8 @@ section, .grid, .project-gallery {
     align-items: center;
     padding: 10px 20px;
     z-index: 9999;
-    background: rgba(0,0,0,0.85); /* visible sur mobile */
+    background: transparent; /* plus de fond noir */
+    pointer-events: auto;
   }
 
   .navbar ul {
@@ -109,11 +110,19 @@ section, .grid, .project-gallery {
   }
 
   .navbar ul li + li::before {
-    display: none; /* supprime séparateur vertical */
+    display: none;
   }
 
-  /* Décalage du contenu directement sous la navbar + language-switcher */
-  .language-switcher + * {
-    margin-top: calc( var(--navbar-height, 60px) + var(--switcher-height, 50px) );
+  /* Language switcher au-dessus du contenu */
+  .language-switcher {
+    position: fixed;
+    top: 0;
+    right: 20px;
+    z-index: 10000;
+  }
+
+  /* Décaler le contenu sous la navbar + language switcher */
+  body > *:not(.navbar):not(.language-switcher) {
+    margin-top: 70px; /* ajuste selon la hauteur réelle de ta navbar */
   }
 }
