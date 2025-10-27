@@ -85,7 +85,7 @@ section, .grid, .project-gallery {
 
 
 @media (max-width: 768px) {
-  /* Language switcher : toujours tout en haut */
+  /* === LANG SWITCHER - toujours tout en haut === */
   .language-switcher {
     position: fixed;
     top: 0;
@@ -93,38 +93,42 @@ section, .grid, .project-gallery {
     z-index: 10000;
   }
 
-  /* Navbar : juste sous le switcher */
+  /* === NAVBAR - juste en dessous === */
   .navbar {
     position: fixed;
-    top: calc(var(--switcher-height, 45px));
+    top: calc(var(--switcher-height, 45px)); /* sous le switcher */
     left: 0;
     width: 100%;
-    height: auto !important; /* ✅ empêche d’occuper toute la hauteur */
+    height: auto !important; /* empêche de prendre toute la hauteur */
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     padding: 8px 20px;
     z-index: 9999;
-    background: transparent !important; /* ✅ enlève tout fond */
-    backdrop-filter: none !important;   /* ✅ enlève flou */
+
+    /* neutralise tout overlay / fond */
+    background: transparent !important;
+    backdrop-filter: none !important;
     pointer-events: auto;
   }
 
-  /* Désactive tout pseudo-élément qui pourrait créer un overlay */
+  /* Supprime toute trace de pseudo-élément ou overlay */
   .navbar::before,
-  .navbar::after {
+  .navbar::after,
+  header::before,
+  header::after {
     content: none !important;
     display: none !important;
     background: none !important;
   }
 
-  /* Désactive le style .scrolled sur mobile */
+  /* Désactive la version “scrolled” (floutée) sur mobile */
   .navbar.scrolled {
     background: transparent !important;
     backdrop-filter: none !important;
   }
 
-  /* Liste horizontale */
+  /* Liste des liens horizontale */
   .navbar ul {
     display: flex;
     flex-direction: row;
@@ -143,41 +147,21 @@ section, .grid, .project-gallery {
     justify-content: flex-start !important;
     align-items: flex-start !important;
     padding-top: 0 !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
   }
 
   /* Décale le contenu sous la navbar + switcher */
   body {
     --switcher-height: 45px;
-    padding-top: calc(var(--switcher-height) + 55px);
-  }
-}
-
-@media (max-width: 768px) {
-  .navbar,
-  .navbar::before,
-  .navbar::after,
-  header::before,
-  header::after {
-    background: transparent !important;
-    backdrop-filter: none !important;
-    height: auto !important;
-    min-height: unset !important;
+    padding-top: calc(var(--switcher-height) + 55px); /* ajuste la valeur selon besoin */
     pointer-events: auto !important;
   }
 
-  /* Juste pour s’assurer que rien ne bloque les clics */
-  header,
-  section,
-  main {
+  /* Empêche tout bloc de bloquer les clics */
+  main, section {
     pointer-events: auto !important;
     z-index: auto !important;
-  }
-
-  /* Et que rien ne couvre tout l’écran */
-  .navbar::before,
-  .navbar::after {
-    content: none !important;
-    display: none !important;
   }
 }
 
