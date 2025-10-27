@@ -88,32 +88,30 @@ section, .grid, .project-gallery {
   /* === LANG SWITCHER - toujours tout en haut === */
   .language-switcher {
     position: fixed;
-    pointer-events: auto; /* ✅ correction : point-events → pointer-events */
     top: 0;
     right: 20px;
     z-index: 10000;
+    pointer-events: auto;
   }
 
-  /* === NAVBAR - juste en dessous === */
+  /* === NAVBAR - juste sous le switcher === */
   .navbar {
     position: fixed;
-    top: calc(var(--switcher-height, 45px)); /* ✅ sous le switcher */
+    top: calc(var(--switcher-height, 45px));
     left: 0;
     width: 100%;
-    height: auto !important; /* ✅ empêche de prendre toute la hauteur */
+    height: auto !important;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     padding: 8px 20px;
     z-index: 9999;
-
-    /* ✅ neutralise tout overlay / fond */
     background: transparent !important;
     backdrop-filter: none !important;
     pointer-events: auto !important;
   }
 
-  /* ✅ Supprime toute trace de pseudo-élément ou overlay */
+  /* Supprime pseudo-éléments ou overlay */
   .navbar::before,
   .navbar::after,
   header::before,
@@ -123,13 +121,13 @@ section, .grid, .project-gallery {
     background: none !important;
   }
 
-  /* ✅ Désactive la version “scrolled” (floutée) sur mobile */
+  /* Désactive le style “scrolled” */
   .navbar.scrolled {
     background: transparent !important;
     backdrop-filter: none !important;
   }
 
-  /* === Liste des liens horizontale === */
+  /* Liste horizontale */
   .navbar ul {
     display: flex;
     flex-direction: row;
@@ -142,7 +140,7 @@ section, .grid, .project-gallery {
     display: none;
   }
 
-  /* === Empêche le header de bloquer les clics ou d’avoir un fond === */
+  /* Empêche le header de bloquer les clics */
   header {
     display: block !important;
     justify-content: flex-start !important;
@@ -152,18 +150,18 @@ section, .grid, .project-gallery {
     backdrop-filter: none !important;
     height: auto !important;
     min-height: 0 !important;
-    pointer-events: none !important; /* ✅ bloque les interactions parasites */
+    pointer-events: none !important;
     z-index: 0 !important;
   }
 
-  /* === Décale le contenu sous la navbar + switcher === */
+  /* Décale le contenu sous navbar + switcher */
   body {
     --switcher-height: 45px;
-    padding-top: calc(var(--switcher-height) + 55px); /* ✅ ajuste selon besoin */
+    padding-top: calc(var(--switcher-height) + 55px);
     pointer-events: auto !important;
   }
 
-  /* === Le contenu redevient interactif === */
+  /* Tout le contenu devient interactif */
   main,
   section,
   #about,
@@ -174,5 +172,6 @@ section, .grid, .project-gallery {
     background: transparent !important;
   }
 }
+
 
 
