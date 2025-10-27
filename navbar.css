@@ -152,4 +152,32 @@ section, .grid, .project-gallery {
   }
 }
 
+@media (max-width: 768px) {
+  .navbar,
+  .navbar::before,
+  .navbar::after,
+  header::before,
+  header::after {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    height: auto !important;
+    min-height: unset !important;
+    pointer-events: auto !important;
+  }
+
+  /* Juste pour s’assurer que rien ne bloque les clics */
+  header,
+  section,
+  main {
+    pointer-events: auto !important;
+    z-index: auto !important;
+  }
+
+  /* Et que rien ne couvre tout l’écran */
+  .navbar::before,
+  .navbar::after {
+    content: none !important;
+    display: none !important;
+  }
+}
 
