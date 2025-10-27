@@ -87,24 +87,32 @@ section, .grid, .project-gallery {
 @media(max-width: 768px){
   /* Navbar : horizontale et collée en haut */
   .navbar {
-    flex-direction: row;        /* liens en ligne */
-    justify-content: flex-start; /* alignés à gauche */
-    align-items: center;        /* verticalement centrés dans la navbar */
-    padding: 10px 20px;
-    position: relative;         /* pour que padding fonctionne correctement */
-  }
+  position: fixed;    /* fixe la navbar par rapport à l’écran */
+  top: 0;             /* tout en haut */
+  left: 0;            /* bord gauche */
+  width: 100%;        /* pleine largeur */
+  z-index: 999;       /* au-dessus du contenu */
+}
+
 
   /* Liste des liens */
+  @media(max-width: 768px){
+  .navbar {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 20px;
+  }
+
   .navbar ul {
-    display: flex;              /* force le flex row */
+    display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     gap: 15px;
-    margin-top: 0;              /* enlever margin qui pousse vers le bas */
+    margin: 0; /* plus de margin-top qui pousse vers le bas */
   }
 
-  /* Supprimer séparateurs entre items */
   .navbar ul li + li::before {
     display: none;
   }
