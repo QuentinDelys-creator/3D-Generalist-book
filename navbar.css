@@ -85,23 +85,17 @@ section, .grid, .project-gallery {
 
 
 @media(max-width: 768px){
-  /* Navbar : horizontale et collée en haut */
   .navbar {
-  position: fixed;    /* fixe la navbar par rapport à l’écran */
-  top: 0;             /* tout en haut */
-  left: 0;            /* bord gauche */
-  width: 100%;        /* pleine largeur */
-  z-index: 999;       /* au-dessus du contenu */
-}
-
-
-  /* Liste des liens */
-  @media(max-width: 768px){
-  .navbar {
+    position: fixed;      /* fixe la navbar en haut */
+    top: 0;               /* tout en haut */
+    left: 0;
+    width: 100%;          /* pleine largeur */
+    display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    align-items: center;
+    align-items: center;  /* aligne les items verticalement */
     padding: 10px 20px;
+    z-index: 9999;
   }
 
   .navbar ul {
@@ -110,10 +104,15 @@ section, .grid, .project-gallery {
     justify-content: flex-start;
     align-items: center;
     gap: 15px;
-    margin: 0; /* plus de margin-top qui pousse vers le bas */
+    margin: 0;            /* supprimer le margin-top */
   }
 
   .navbar ul li + li::before {
     display: none;
+  }
+
+  /* Pour éviter que le contenu soit caché derrière la navbar */
+  body {
+    padding-top: 60px; /* ou la hauteur exacte de la navbar */
   }
 }
