@@ -284,101 +284,11 @@ body.no-scroll {
   border-radius: 2px;
 }
 
-/* === ABOUT FIX GLOBAL === */
-
+/* === SECTION À PROPOS (fusion corrigée) === */
 #about {
   position: relative;
   width: 100%;
-  overflow-x: hidden; /* ✅ empêche tout dépassement horizontal */
-  display: flex;
-  justify-content: center;
-  padding: 80px 20px;
-  box-sizing: border-box;
-}
-
-.about-container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 30px;
-  max-width: 1200px;
-  width: 100%; /* ✅ s’aligne avec le viewport sans dépasser */
-  margin: 0 auto;
-  text-align: left;
-}
-
-.about-container img {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  object-fit: cover;
-  flex-shrink: 0;
-}
-
-.about-text {
-  flex: 1 1 400px;
-  min-width: 280px;
-  color: #f5f5f5;
-  font-size: 1rem;
-  line-height: 1.6;
-  max-width: 700px;
-}
-
-/* ✅ RESPONSIVE MOBILE */
-@media (max-width: 768px) {
-  .about-container {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .about-container img {
-    width: 140px;
-    height: 140px;
-  }
-
-  .about-text {
-    font-size: 0.95rem;
-    padding: 0 15px;
-  }
-}
-
-/* === SOFTWARE GRID RESPONSIVE FIX === */
-.software-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 25px;
-  margin-top: 40px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.software-grid img {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  transition: transform 0.3s ease;
-}
-
-.software-grid img:hover {
-  transform: scale(1.1);
-}
-
-@media (max-width: 600px) {
-  .software-grid img {
-    width: 60px;
-    height: 60px;
-  }
-}
-
-
-
-/* ======== SECTION À PROPOS ======== */
-#about {
-  width: 100vw; /* prend toute la largeur */
-  background: linear-gradient(135deg, #f0f0f0 0%, #dcdcdc 100%); /* ✅ plus clair et contrasté */
+  background: linear-gradient(135deg, #f0f0f0 0%, #dcdcdc 100%);
   color: #111;
   padding: 100px 20px;
   display: flex;
@@ -388,6 +298,8 @@ body.no-scroll {
   text-align: center;
   border-top: 2px solid rgba(0,0,0,0.05);
   border-bottom: 2px solid rgba(0,0,0,0.05);
+  box-sizing: border-box;
+  overflow-x: hidden; /* ✅ garde tout dans le viewport */
 }
 
 #about h2 {
@@ -406,16 +318,15 @@ body.no-scroll {
   justify-content: center;
   max-width: 900px;
   gap: 40px;
+  box-sizing: border-box;
 }
 
 /* Photo de profil */
 .about-wrapper > img {
-  width: 180px;
-  height: 180px;
-  object-fit: cover;
+  width: clamp(120px, 25vw, 180px);
+  height: auto;
   border-radius: 50%;
   box-shadow: 0 0 20px rgba(0,0,0,0.25);
-  margin-top: -20px;
   transition: transform 0.3s ease;
 }
 
@@ -431,17 +342,21 @@ body.no-scroll {
   text-align: center;
   max-width: 650px;
   margin: 0 auto;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  padding: 0 10px;
 }
 
-/* ======== SECTION LOGICIELS (nouvelle version) ======== */
+/* LOGICIELS */
 #softwares {
-  width: 100vw;
+  width: 100%;
   background: linear-gradient(135deg, #ededed 0%, #d9d9d9 100%);
   color: #111;
   padding: 80px 40px;
   text-align: center;
   border-top: 2px solid rgba(0,0,0,0.05);
   border-bottom: 2px solid rgba(0,0,0,0.05);
+  box-sizing: border-box;
 }
 
 #softwares h2 {
@@ -452,29 +367,21 @@ body.no-scroll {
   letter-spacing: 1px;
 }
 
-/* Grille des logiciels */
+/* Grille logicielle */
 .software-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 30px;
   justify-items: center;
   align-items: center;
   max-width: 900px;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
-/* Chaque logiciel */
-.software-grid div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-/* Icônes */
 .software-grid img {
-  width: 60px;
-  height: 60px;
+  width: clamp(45px, 10vw, 70px);
+  height: auto;
   object-fit: contain;
   opacity: 0.9;
   transition: transform 0.3s ease, opacity 0.3s ease;
@@ -485,77 +392,31 @@ body.no-scroll {
   opacity: 1;
 }
 
-/* Nom du logiciel */
-.software-grid p {
-  font-size: 0.95rem;
-  font-weight: 400;
-  color: #222;
-  margin-top: 5px;
-}
-
 /* Responsive */
 @media (max-width: 768px) {
-  .software-grid {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 25px;
+  #about {
+    padding: 60px 20px;
   }
 
-  .software-grid img {
-    width: 45px;
-    height: 45px;
+  #softwares {
+    padding: 60px 20px;
   }
 
+  #about h2,
   #softwares h2 {
     font-size: 1.6rem;
   }
-}
 
-
-/* Responsive */
-@media(max-width: 900px) {
-  .about-wrapper {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+  .software-grid {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 20px;
   }
 
-  .about-wrapper p {
-    text-align: center;
-  }
-
-  #skills-section img {
-    width: 36px; /* ✅ réduction automatique sur mobile */
-    height: 36px;
+  .software-grid img {
+    width: clamp(40px, 12vw, 60px);
   }
 }
 
-
-/* Responsive */
-@media(max-width: 900px) {
-  .about-wrapper {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .about-wrapper p {
-    text-align: center;
-  }
-}
-
-
-/* Responsive */
-@media(max-width: 900px) {
-  .about-wrapper {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .about-wrapper p {
-    text-align: center;
-  }
-}
 
 /* ======== SECTION CONTACT ======== */
 /* CONTACT — fond plein écran + contenu centré */
