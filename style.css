@@ -284,139 +284,6 @@ body.no-scroll {
   border-radius: 2px;
 }
 
-/* === SECTION À PROPOS (fusion corrigée) === */
-#about {
-  position: relative;
-  width: 100%;
-  background: linear-gradient(135deg, #f0f0f0 0%, #dcdcdc 100%);
-  color: #111;
-  padding: 100px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border-top: 2px solid rgba(0,0,0,0.05);
-  border-bottom: 2px solid rgba(0,0,0,0.05);
-  box-sizing: border-box;
-  overflow-x: hidden; /* ✅ garde tout dans le viewport */
-}
-
-#about h2 {
-  font-size: 2.4rem;
-  color: #111;
-  margin-bottom: 40px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-/* Conteneur principal */
-.about-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  max-width: 900px;
-  gap: 40px;
-  box-sizing: border-box;
-}
-
-/* Photo de profil */
-.about-wrapper > img {
-  width: clamp(120px, 25vw, 180px);
-  height: auto;
-  border-radius: 50%;
-  box-shadow: 0 0 20px rgba(0,0,0,0.25);
-  transition: transform 0.3s ease;
-}
-
-.about-wrapper > img:hover {
-  transform: scale(1.05);
-}
-
-/* Texte */
-.about-wrapper p {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: #333;
-  text-align: center;
-  max-width: 650px;
-  margin: 0 auto;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  padding: 0 10px;
-}
-
-/* LOGICIELS */
-#softwares {
-  width: 100%;
-  background: linear-gradient(135deg, #ededed 0%, #d9d9d9 100%);
-  color: #111;
-  padding: 80px 40px;
-  text-align: center;
-  border-top: 2px solid rgba(0,0,0,0.05);
-  border-bottom: 2px solid rgba(0,0,0,0.05);
-  box-sizing: border-box;
-}
-
-#softwares h2 {
-  font-size: 2rem;
-  font-weight: 500;
-  margin-bottom: 50px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-/* Grille logicielle */
-.software-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 30px;
-  justify-items: center;
-  align-items: center;
-  max-width: 900px;
-  margin: 0 auto;
-  box-sizing: border-box;
-}
-
-.software-grid img {
-  width: clamp(45px, 10vw, 70px);
-  height: auto;
-  object-fit: contain;
-  opacity: 0.9;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.software-grid img:hover {
-  transform: scale(1.15);
-  opacity: 1;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  #about {
-    padding: 60px 20px;
-  }
-
-  #softwares {
-    padding: 60px 20px;
-  }
-
-  #about h2,
-  #softwares h2 {
-    font-size: 1.6rem;
-  }
-
-  .software-grid {
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-    gap: 20px;
-  }
-
-  .software-grid img {
-    width: clamp(40px, 12vw, 60px);
-  }
-}
-
 
 /* ======== SECTION CONTACT ======== */
 /* CONTACT — fond plein écran + contenu centré */
@@ -872,104 +739,151 @@ li::before,
 li::after {
   content: none !important;
 }
-/* === GLOBAL ANTI-SCROLL HORIZONTAL FIX === */
+
+/* ===========================
+   ABOUT & SOFTWARES - CLEAN
+   (Coller à la fin du fichier, unique définition)
+   =========================== */
+
+/* sécurité globale */
 html, body {
+  box-sizing: border-box;
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
-  box-sizing: border-box;
+  overflow-x: hidden; /* empêche le débordement horizontal */
 }
+*, *::before, *::after { box-sizing: inherit; }
 
-*, *::before, *::after {
-  box-sizing: inherit;
-}
-
-/* === ABOUT SECTION FIX === */
+/* SECTION ABOUT */
 #about {
-  position: relative;
   width: 100%;
   background: linear-gradient(135deg, #f0f0f0 0%, #dcdcdc 100%);
   color: #111;
-  padding: 100px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border-top: 2px solid rgba(0,0,0,0.05);
-  border-bottom: 2px solid rgba(0,0,0,0.05);
+  padding: 80px 16px;               /* padding horizontal compact */
   box-sizing: border-box;
+  display: block;                   /* garde simple, évite flex-row imprévu */
+  text-align: center;
+  overflow: hidden;
 }
 
-/* Empêche toute déformation de la photo */
-.about-wrapper > img {
+/* wrapper centré et contraint */
+#about .about-wrapper,
+#about .about-container {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 12px;
+  display: flex;
+  flex-direction: column;           /* colonne pour éviter débordement horizontal */
+  align-items: center;
+  gap: 28px;
+}
+
+/* titre */
+#about h2 {
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  margin: 0 0 8px 0;
+  color: #111;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* photo : taille fixe selon breakpoint, pas d'ovale */
+#about .about-wrapper > img,
+#about .about-container img {
   width: 180px;
   height: 180px;
   border-radius: 50%;
   object-fit: cover;
-}
-
-/* Conteneur principal bien centré */
-.about-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  max-width: 900px;
-  width: 100%;
-  gap: 40px;
+  display: block;
   margin: 0 auto;
-  padding: 0 15px;
 }
 
-/* === SOFTWARES SECTION FIX === */
+/* texte */
+#about .about-text,
+#about .about-wrapper p {
+  color: #222;
+  font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+  line-height: 1.6;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 10px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* SOFTS SECTION */
 #softwares {
   width: 100%;
   background: linear-gradient(135deg, #ededed 0%, #d9d9d9 100%);
-  color: #111;
-  padding: 80px 40px;
+  padding: 60px 16px;
+  box-sizing: border-box;
   text-align: center;
-  border-top: 2px solid rgba(0,0,0,0.05);
-  border-bottom: 2px solid rgba(0,0,0,0.05);
+  color: #111;
+  border-top: 2px solid rgba(0,0,0,0.04);
+  border-bottom: 2px solid rgba(0,0,0,0.04);
+}
+
+#softwares h2 {
+  font-size: clamp(1.3rem, 2.8vw, 2rem);
+  margin-bottom: 20px;
+}
+
+/* grille des logos — centrée et responsive */
+#softwares .software-grid,
+#about .software-grid {
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: clamp(12px, 3vw, 30px);
+  justify-items: center;
+  align-items: center;
   box-sizing: border-box;
 }
 
-/* Grille logicielle — bien contenue */
-.software-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 40px;
-  justify-items: center;
-  align-items: center;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 10px;
+/* icônes */
+#softwares .software-grid img,
+#about .software-grid img {
+  width: clamp(40px, 8vw, 70px);
+  height: auto;
+  object-fit: contain;
+  display: inline-block;
+  transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
-/* === RESPONSIVE MOBILE (corrige mobile sans déformer desktop) === */
+#softwares .software-grid img:hover,
+#about .software-grid img:hover {
+  transform: scale(1.12);
+  opacity: 1;
+}
+
+/* noms logiciels */
+#softwares .software-grid p {
+  margin-top: 6px;
+  color: #222;
+  font-size: clamp(0.75rem, 1.8vw, 0.95rem);
+}
+
+/* ===== responsive specifics ===== */
+@media (max-width: 1024px) {
+  #about { padding: 60px 14px; }
+  #about .about-wrapper > img { width: 160px; height: 160px; }
+  #about .about-text { max-width: 720px; }
+  #softwares { padding: 50px 14px; }
+}
+
 @media (max-width: 768px) {
-  #about {
-    padding: 60px 15px;
-  }
-
-  .about-wrapper > img {
-    width: 140px;
-    height: 140px;
-  }
-
-  .about-wrapper p {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    text-align: center;
-  }
-
-  .software-grid {
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-    gap: 25px;
-  }
-
-  .software-grid img {
-    width: 45px;
-    height: 45px;
-  }
+  #about { padding: 48px 12px; }
+  #about .about-wrapper > img { width: 120px; height: 120px; }
+  #about h2 { font-size: 1.6rem; }
+  #softwares { padding: 40px 12px; }
+  #softwares .software-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  #softwares .software-grid img { width: clamp(36px, 12vw, 56px); }
 }
+
+/* petite optimisation : éviter que les éléments absolus hors sections étendent le layout */
+section *[style*="position: absolute"] { max-width: 100%; box-sizing: border-box; }
+
