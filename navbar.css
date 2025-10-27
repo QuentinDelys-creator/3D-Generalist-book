@@ -97,7 +97,7 @@ section, .grid, .project-gallery {
     align-items: center;
     padding: 10px 20px;
     z-index: 9999;
-    background: rgba(0,0,0,0.85); /* si tu veux visible sur mobile */
+    background: rgba(0,0,0,0.85); /* visible sur mobile */
   }
 
   .navbar ul {
@@ -109,20 +109,11 @@ section, .grid, .project-gallery {
   }
 
   .navbar ul li + li::before {
-    display: none;
+    display: none; /* supprime séparateur vertical */
   }
 
-  /* Empêche le centrage vertical du header parent */
-  header {
-    display: block;      /* pas de flex centré */
-    min-height: auto;    /* laisse la hauteur naturelle */
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding-top: 0;
-  }
-
-  /* Décaler le contenu sous la navbar et les boutons de langue */
-  body {
-    padding-top: 140px; /* ajuster selon la hauteur navbar + boutons */
+  /* Décalage du contenu directement sous la navbar + language-switcher */
+  .language-switcher + * {
+    margin-top: calc( var(--navbar-height, 60px) + var(--switcher-height, 50px) );
   }
 }
