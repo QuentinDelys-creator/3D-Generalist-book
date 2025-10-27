@@ -85,7 +85,7 @@ section, .grid, .project-gallery {
 
 
 @media (max-width: 768px) {
-  /* Le language switcher reste en haut */
+  /* Language switcher : toujours tout en haut */
   .language-switcher {
     position: fixed;
     top: 0;
@@ -93,19 +93,35 @@ section, .grid, .project-gallery {
     z-index: 10000;
   }
 
-  /* Navbar juste en dessous du switcher */
+  /* Navbar : juste sous le switcher */
   .navbar {
     position: fixed;
-    top: calc( var(--switcher-height, 45px) );
+    top: calc(var(--switcher-height, 45px));
     left: 0;
     width: 100%;
+    height: auto !important; /* ✅ empêche d’occuper toute la hauteur */
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     padding: 8px 20px;
-    background: transparent;
     z-index: 9999;
+    background: transparent !important; /* ✅ enlève tout fond */
+    backdrop-filter: none !important;   /* ✅ enlève flou */
     pointer-events: auto;
+  }
+
+  /* Désactive tout pseudo-élément qui pourrait créer un overlay */
+  .navbar::before,
+  .navbar::after {
+    content: none !important;
+    display: none !important;
+    background: none !important;
+  }
+
+  /* Désactive le style .scrolled sur mobile */
+  .navbar.scrolled {
+    background: transparent !important;
+    backdrop-filter: none !important;
   }
 
   /* Liste horizontale */
@@ -121,7 +137,7 @@ section, .grid, .project-gallery {
     display: none;
   }
 
-  /* Supprimer tout centrage vertical du header */
+  /* Empêche le header d’être centré verticalement */
   header {
     display: block !important;
     justify-content: flex-start !important;
@@ -129,10 +145,11 @@ section, .grid, .project-gallery {
     padding-top: 0 !important;
   }
 
-  /* Décaler le contenu sous la navbar + switcher */
+  /* Décale le contenu sous la navbar + switcher */
   body {
-    --switcher-height: 45px; /* si tu veux ajuster, change ici */
-    padding-top: calc(var(--switcher-height) + 55px); /* switcher + navbar */
+    --switcher-height: 45px;
+    padding-top: calc(var(--switcher-height) + 55px);
   }
 }
+
 
