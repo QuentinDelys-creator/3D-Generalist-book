@@ -86,11 +86,11 @@ section, .grid, .project-gallery {
 
 @media(max-width: 768px){
   .navbar {
-    flex-direction: column;
+    flex-direction: row;
     padding: 10px 20px;
   }
   .navbar ul {
-    flex-direction: column;
+    flex-direction: row;
     gap: 15px;
     margin-top: 10px;
   }
