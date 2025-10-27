@@ -85,8 +85,9 @@ section, .grid, .project-gallery {
 
 
 @media (max-width: 768px) {
+  /* Navbar fixée en haut, horizontal, padding réduit */
   .navbar {
-    position: fixed;   /* sort de la structure normale */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -96,13 +97,14 @@ section, .grid, .project-gallery {
     align-items: center;
     padding: 10px 20px;
     z-index: 9999;
+    pointer-events: auto;
   }
 
   .navbar ul {
     display: flex;
     flex-direction: row;
     gap: 15px;
-    margin: 0;         /* plus de margin-top qui pousse vers le bas */
+    margin: 0;
     padding: 0;
   }
 
@@ -110,13 +112,17 @@ section, .grid, .project-gallery {
     display: none;
   }
 
-  /* Important : si le parent a flex centré verticalement */
-  body, header {
-    display: block;    /* désactive le centrage vertical du parent */
+  /* Empêche le centrage vertical du header parent */
+  header {
+    display: block !important;
+    min-height: auto !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    padding-top: 0 !important;
   }
 
-  /* Pour que le contenu ne soit pas caché derrière */
+  /* Décaler le reste du contenu pour ne pas cacher derrière la navbar */
   body {
-    padding-top: 60px; /* hauteur exacte de la navbar */
+    padding-top: 60px; /* ajuster selon hauteur réelle navbar */
   }
 }
